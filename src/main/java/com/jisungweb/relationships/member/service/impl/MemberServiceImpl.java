@@ -15,7 +15,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void insertUser() {
-
+		System.out.println("====MemberServiceImpl.insertUser====");
 		Map<String, String> memTest = new HashMap<String, String>();
 		memTest.put("id", "iujisu");
 		memTest.put("name", "유지성");

@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521/xe
+    username: jisungnew
+    password: jisungnew1234
+
+# mybatis 설정.
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml

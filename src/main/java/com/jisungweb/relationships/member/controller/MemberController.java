@@ -21,6 +21,7 @@ public class MemberController {
 
 		@GetMapping("/memberAdd")
 		public void memberAdd() {
+			System.out.println("====MemberController.insertUser====");
 			memService.insertUser();
 		}
 			
