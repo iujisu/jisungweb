@@ -20,7 +20,7 @@ public class MemberController {
 		}
 
 		@GetMapping("/memberAdd")
-		public void memberAdd() {
+		public void memberAdd() throws Exception {
 			System.out.println("====MemberController.insertUser====");
 			memService.insertUser();
 		}
