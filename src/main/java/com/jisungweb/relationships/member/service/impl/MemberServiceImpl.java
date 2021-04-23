@@ -12,9 +12,8 @@ import com.jisungweb.relationships.member.service.MemberService;
 @Service
 public class MemberServiceImpl implements MemberService {
 	
-
 	@Autowired
-	private MemberMapper memMapper;
+	MemberMapper memMapper;
 
 	@Override
 	public void insertUser() throws Exception{

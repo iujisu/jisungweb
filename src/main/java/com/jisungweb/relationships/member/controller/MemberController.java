@@ -14,12 +14,12 @@ public class MemberController {
 		@Autowired
 		private   MemberService memService;
 
-		@GetMapping("/hello")
-		public String hello() {
-			return "<h1>member/hello spring boot</h1>";
-		}
+//		@GetMapping("/hello")
+//		public String hello() {
+//			return "<h1>member/hello spring boot</h1>";
+//		}
 
-		@GetMapping("/memberAdd")
+		@GetMapping("/memberadd")
 		public void memberAdd() throws Exception {
 			System.out.println("====MemberController.insertUser====");
 			memService.insertUser();
