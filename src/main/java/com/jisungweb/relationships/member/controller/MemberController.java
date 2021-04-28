@@ -18,10 +18,10 @@ public class MemberController {
 		@Autowired
 		private   MemberService memService;
 
-//		@GetMapping("/hello")
-//		public String hello() {
-//			return "<h1>member/hello spring boot</h1>";
-//		}
+		@GetMapping("/hello")
+		public String hello() {
+			return "<h1>member/hello spring boot</h1>";
+		}
 
 		@PostMapping("/memberadd")
 		public void memberAdd(@RequestBody MemberVo memberVo) throws Exception {
