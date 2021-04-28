@@ -3,22 +3,32 @@
   
 <mapper namespace="com.jisungweb.relationships.member.mapper.MemberMapper">
 
-	  <insert id="insertUser" parameterType="java.util.HashMap" >
-	     	INSERT INTO TB_USER (
-		     	USER_SEQ
-				,ID
-				,NAME
-				,MOBILE
+		<select id="getUserSeq" resultType="string">
+			SELECT USERSEQ.NEXTVAL FROM DUAL
+		</select>
+
+		<insert id="insertUser" parameterType="java.util.HashMap" >
+		   	INSERT INTO TB_USER (
+		    	USER_SEQ
+				,USER_ID
+				,USER_NAME
+				,PHONE_NUMBER
+				,USER_PASSWORD
+				,USER_EMAIL
+				,USER_KEY
 				,CREA_DATA
-	     	)
-	     	VALUES 
-	     	(
-	     		USERSEQ.NEXTVAL
-				,#{id}
-				,#{name}
-				,#{mobile}
+			 )VALUES (
+			   	${userSeq}
+				,#{userId}	
+				,#{userName} 
+				,#{phoneNumber}
+				,#{userPassword}
+				,#{userEmail}
+				,(SELECT TO_CHAR(SYSDATE, 'YYYYMMDD') || LPAD(${userSeq}, 10, 0) FROM DUAL)
 				,SYSDATE
-	     	)
-	  </insert>
+		   	)
+		</insert>
+	  
+
   
 </mapper>

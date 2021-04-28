@@ -9,12 +9,17 @@ import lombok.Setter;
 public class MemberVo {
 	
 	 private String userSeq;
+	
+	 private String userId;
 	 
-	 private String id;
+	 private String userName; 
 	 
-	 private String name;
+	 private String phoneNumber; 
 	 
-	 private String mobile;
+	 private String userPassword;
 	 
-	 private String creaData;
+	 private String userEmail;
+	 
+	 private String userKey;
+	 
 }

@@ -9,4 +9,6 @@ public interface MemberMapper {
 
 	public void insertUser(Map<String, String> memTest);
 
+	public String getUserSeq();
+
 }

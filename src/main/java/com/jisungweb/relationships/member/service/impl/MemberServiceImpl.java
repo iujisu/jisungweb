@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.jisungweb.relationships.member.mapper.MemberMapper;
 import com.jisungweb.relationships.member.service.MemberService;
+import com.jisungweb.relationships.member.vo.MemberVo;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -16,12 +17,18 @@ public class MemberServiceImpl implements MemberService {
 	MemberMapper memMapper;
 
 	@Override
-	public void insertUser() throws Exception{
+	public void insertUser(MemberVo memberVo) throws Exception{
 		System.out.println("====MemberServiceImpl.insertUser====");
+		String userSeq=memMapper.getUserSeq();
 		Map<String, String> memTest = new HashMap<String, String>();
-		memTest.put("id", "iujisu");
-		memTest.put("name", "유지성");
-		memTest.put("mobile", "01089211782");
+		memTest.put("userSeq", userSeq);
+		memTest.put("userId", "iujisu");
+		memTest.put("userName", "유지성");
+		memTest.put("phoneNumber", "01089211782");
+		memTest.put("userPassword", "1234");
+		memTest.put("userEmail", "iujisu@naver.com");
+		//memTest.put("userKey", "20210428000001");
+
 		
 		memMapper.insertUser(memTest);
 	}
