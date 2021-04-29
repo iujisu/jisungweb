@@ -17,7 +17,7 @@ public class MemberServiceImpl implements MemberService {
 	MemberMapper memMapper;
 
 	@Override
-	public void insertUser(MemberVo memberVo) throws Exception{
+	public void insertUser(MemberVo memberVo){
 		System.out.println("====MemberServiceImpl.insertUser====");
 		String userSeq=memMapper.getUserSeq();
 		Map<String, String> memTest = new HashMap<String, String>();

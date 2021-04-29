@@ -4,6 +4,6 @@ import com.jisungweb.relationships.member.vo.MemberVo;
 
 public interface MemberService {
 
-	void insertUser(MemberVo memberVo) throws Exception;
+	void insertUser(MemberVo memberVo) ;
 
 }
