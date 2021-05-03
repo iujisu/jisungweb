@@ -7,6 +7,7 @@ server:
       charset: UTF-8
       enabled: true
       force: true
+
       
 spring:
   datasource:
@@ -14,6 +15,12 @@ spring:
     url: jdbc:log4jdbc:oracle:thin:@localhost:1521/xe
     username: jisungnew
     password: jisungnew1234
+  servlet:
+    multipart:
+      file-size-threshold: 5MB
+      location: C:/Temp
+      max-file-size: 100MB
+      max-request-size: 100MB   
 
   mvc:
     view:
