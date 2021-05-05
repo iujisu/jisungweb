@@ -4,11 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,13 +37,15 @@ public class MemberController {
 			return "<h1>member/hello spring boot</h1>";
 		}
 
-		@PostMapping(value="/memberadd", consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
+		
 		@ApiOperation(value="사용자 정보 등록",notes = "사용자 정보 등록을 한다")
-		public ResponseEntity<?> memberAdd(@RequestBody MemberVo memberVo,@RequestPart("file") MultipartFile file) {
+		@PostMapping(value="/memberadd")
+		public ResponseEntity<?> memberAdd(@RequestPart("file") MultipartFile file,MemberVo memberVo) {
 			System.out.println("====MemberController.insertUser====");
 			System.out.println("getUserId==>>>"+memberVo.getUserId());
 			System.out.println("getUserId==>>>"+memberVo.getPhoneNumber());
-			
+
+			System.out.println("====fileTest====");
 			logger.info("file = " + file.getSize());
 		
 			
