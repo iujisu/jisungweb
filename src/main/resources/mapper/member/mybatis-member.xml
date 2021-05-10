@@ -7,7 +7,7 @@
 			SELECT USERSEQ.NEXTVAL FROM DUAL
 		</select>
 
-		<insert id="insertUser" parameterType="java.util.HashMap" >
+		<insert id="insertUser" >
 		   	INSERT INTO TB_USER (
 		    	USER_SEQ
 				,USER_ID
@@ -28,6 +28,61 @@
 				,SYSDATE
 		   	)
 		</insert>
+		
+		<update  id="updateUser" >
+			UPDATE TB_USER SET 
+			CHANGE_DATE =SYSDATE,
+			<if test="userEmail != null and userEmail != '' ">
+   				USER_EMAIL=#{userEmail},
+			</if>
+			<if test="userId != null and userId != '' ">
+   				USER_ID=#{userId},
+			</if>
+			<if test="userPassword != null and userPassword != '' ">
+   				USER_PASSWORD=#{userPassword},
+			</if>
+			<if test="userPassword != null and userPassword != '' ">
+   				USER_NAME=#{userName},
+			</if>
+			<if test="phoneNumber != null and phoneNumber != '' ">
+   				PHONE_NUMBER=#{phoneNumber},
+			</if>
+			WHERE  USER_KEY=#{userKey}
+		</update>
+		
+		<select id="getLoginUser" resultType="MemberVo">
+			SELECT  * FROM TB_USER WHERE 
+			USER_ID=#{userId} 
+   			AND USER_PASSWORD=#{userPassword}
+			<if test="userName != null and userName != '' ">
+   				AND USER_NAME=#{userName}
+			</if>
+			<if test="phoneNumber != null and phoneNumber != '' ">
+   				AND PHONE_NUMBER=#{phoneNumber}
+			</if>
+			<if test="userEmail != null and userEmail != '' ">
+   				AND USER_EMAIL=#{userEmail}
+			</if>
+		</select>
+		
+		<select id="getUserKey" resultType="MemberVo">
+			SELECT  USER_KEY FROM TB_USER WHERE USER_NAME=#{userName} AND PHONE_NUMBER=#{phoneNumber}
+		</select>
+		
+		<select id="getIsUser" resultType="MemberVo">
+			SELECT  * FROM TB_USER WHERE USER_ID=#{userId} 
+			<if test="userName != null and userName != '' ">
+   				AND USER_NAME=#{userName}
+			</if>
+			<if test="phoneNumber != null and phoneNumber != '' ">
+   				AND PHONE_NUMBER=#{phoneNumber}
+			</if>
+			<if test="userEmail != null and userEmail != '' ">
+   				AND USER_EMAIL=#{userEmail}
+			</if>
+		</select>
+		
+	
 	  
 
   

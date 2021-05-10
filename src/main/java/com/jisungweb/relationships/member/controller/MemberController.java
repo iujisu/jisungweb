@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,20 +41,31 @@ public class MemberController {
 		
 		@ApiOperation(value="사용자 정보 등록",notes = "사용자 정보 등록을 한다")
 		@PostMapping(value="/memberadd")
-		public ResponseEntity<?> memberAdd(@RequestPart("file") MultipartFile file,MemberVo memberVo) {
+		public ResponseEntity<?> memberAdd(@RequestPart MultipartFile file,MemberVo memberVo) {
+			Map<String, String> map = new HashMap<String, String>();
+			
 			System.out.println("====MemberController.insertUser====");
-			System.out.println("getUserId==>>>"+memberVo.getUserId());
 			System.out.println("getUserId==>>>"+memberVo.getPhoneNumber());
 
 			System.out.println("====fileTest====");
-			logger.info("file = " + file.getSize());
+		//	logger.info("file = " + file.getSize());
 		
 			
-			memService.insertUser(memberVo);
+			Map<String, Object> returnMap = memService.insertUser(memberVo);
 			
+			return ResponseEntity.ok(returnMap);
+		}
+		
+		@ApiOperation(value="사용자 정보 등록",notes = "사용자 정보 등록을 한다")
+		@PostMapping(value="/loginUser")
+		public ResponseEntity<?> loginUser(@RequestBody MemberVo memberVo) {
 			Map<String, String> map = new HashMap<String, String>();
+			System.out.println("====MemberController.insertUser====");
+			System.out.println("getUserId==>>>"+memberVo.getPhoneNumber());
 
-			return ResponseEntity.ok(map);
+			Map<String, Object> returnMap = memService.loginUser(memberVo);
+			
+			return ResponseEntity.ok(returnMap);
 		}
 			
 }
