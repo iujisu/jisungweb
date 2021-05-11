@@ -41,18 +41,18 @@ public class MemberController {
 		
 		@ApiOperation(value="사용자 정보 등록",notes = "사용자 정보 등록을 한다")
 		@PostMapping(value="/memberadd")
-		public ResponseEntity<?> memberAdd(@RequestPart MultipartFile file,MemberVo memberVo) {
+		public ResponseEntity<?> memberAdd(@RequestPart(value="file", required=false) MultipartFile file,MemberVo memberVo) {
 			Map<String, String> map = new HashMap<String, String>();
 			
 			System.out.println("====MemberController.insertUser====");
 			System.out.println("getUserId==>>>"+memberVo.getPhoneNumber());
 
 			System.out.println("====fileTest====");
-		//	logger.info("file = " + file.getSize());
+			logger.info("file = " + file.getSize());
 		
 			
 			Map<String, Object> returnMap = memService.insertUser(memberVo);
-			
+			System.out.println("====returnMap.message=>>"+returnMap.get("message"));
 			return ResponseEntity.ok(returnMap);
 		}
 		
