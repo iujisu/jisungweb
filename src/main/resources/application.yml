@@ -18,10 +18,11 @@ spring:
     
   servlet:
     multipart:
-      file-size-threshold: 5MB
+      file-size-threshold: 10MB
+      location: D:/upload/
       max-file-size: 100MB
       max-request-size: 100MB   
-
+      
   mvc:
     view:
       prefix: /templates/
@@ -38,3 +39,4 @@ logging:
     root: INFO
   file:
     path: d:/Logs/
+

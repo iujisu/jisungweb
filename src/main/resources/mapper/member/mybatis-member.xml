@@ -17,6 +17,7 @@
 				,USER_EMAIL
 				,USER_KEY
 				,CREA_DATA
+				,USER_IMAGE_PATH
 			 )VALUES (
 			   	${userSeq}
 				,#{userId}	
@@ -26,6 +27,7 @@
 				,#{userEmail}
 				,(SELECT TO_CHAR(SYSDATE, 'YYYYMMDD') || LPAD(${userSeq}, 10, 0) FROM DUAL)
 				,SYSDATE
+				,#{userImagePath}
 		   	)
 		</insert>
 		
@@ -41,7 +43,7 @@
 			<if test="userPassword != null and userPassword != '' ">
    				USER_PASSWORD=#{userPassword},
 			</if>
-			<if test="userPassword != null and userPassword != '' ">
+			<if test="userName != null and userName != '' ">
    				USER_NAME=#{userName},
 			</if>
 			<if test="phoneNumber != null and phoneNumber != '' ">

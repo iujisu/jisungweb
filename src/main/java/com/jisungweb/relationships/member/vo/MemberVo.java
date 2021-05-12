@@ -10,25 +10,29 @@ import lombok.Setter;
 @Setter
 public class MemberVo {
 	
-	@ApiModelProperty(example ="고유번호")
+	@ApiModelProperty(value ="고유번호")
 	 private String userSeq;
 	
-	@ApiModelProperty(example ="유저아이디")
+	@ApiModelProperty(value ="유저아이디")
 	 private String userId;
 	 
-	@ApiModelProperty(example ="유저명")
+	@ApiModelProperty(value ="유저명")
 	 private String userName; 
 	 
-	@ApiModelProperty(example ="유저폰넘버")
+	@ApiModelProperty(value ="유저폰넘버")
 	 private String phoneNumber; 
 	 
-	@ApiModelProperty(example ="유저비밀번호")
+	@ApiModelProperty(value ="유저비밀번호")
 	 private String userPassword;
 	 
-	@ApiModelProperty(example ="유저이메일")
+	@ApiModelProperty(value ="유저이메일")
 	 private String userEmail;
 	 
-	@ApiModelProperty(example ="유저key")
+	@ApiModelProperty(value="유저key")
 	 private String userKey;
+	
+	@ApiModelProperty(value ="유저key")
+	 private String userImagePath;
+	
 	 
 }

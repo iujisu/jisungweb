@@ -1,9 +1,12 @@
 package com.jisungweb.relationships.member.controller;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +31,10 @@ import org.slf4j.LoggerFactory;
 public class MemberController {
 	
 	public static final Logger logger = LoggerFactory.getLogger(MemberController.class); 
+	
+		@Value("${spring.servlet.multipart.location}") 
+		private String FILE_PATH;
+
 
 		@Autowired
 		private   MemberService memService;
@@ -40,19 +47,28 @@ public class MemberController {
 
 		
 		@ApiOperation(value="사용자 정보 등록",notes = "사용자 정보 등록을 한다")
-		@PostMapping(value="/memberadd")
-		public ResponseEntity<?> memberAdd(@RequestPart(value="file", required=false) MultipartFile file,MemberVo memberVo) {
-			Map<String, String> map = new HashMap<String, String>();
+		@PostMapping(value="/memberJoin")
+		public ResponseEntity<?> memberJoin(@RequestPart(value="file", required=false) MultipartFile file,MemberVo memberVo) throws Exception {
+			System.out.println("====MemberController.memberJoin====");
 			
-			System.out.println("====MemberController.insertUser====");
-			System.out.println("getUserId==>>>"+memberVo.getPhoneNumber());
-
-			System.out.println("====fileTest====");
-			logger.info("file = " + file.getSize());
-		
-			
+			if(file != null) {
+				//logger.info("file = " + file.getSize());
+				//logger.info("file.isEmpty() = " + file.isEmpty());
+				//파일 생성
+                String orifileName = file.getOriginalFilename();
+                //확장자 짤라줌
+                String ext = orifileName.substring(orifileName.indexOf("."));
+                //reName 규칙 설정
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmssSSS");
+                int rdv = (int)(Math.random()*1000);
+                
+                String reName = sdf.format(System.currentTimeMillis())+"_"+rdv+ext;
+                String filePath = FILE_PATH  + reName;
+    			File memberFile = new File(filePath);
+    			file.transferTo(memberFile); 
+    			memberVo.setUserImagePath(filePath);
+			}
 			Map<String, Object> returnMap = memService.insertUser(memberVo);
-			System.out.println("====returnMap.message=>>"+returnMap.get("message"));
 			return ResponseEntity.ok(returnMap);
 		}
 		
