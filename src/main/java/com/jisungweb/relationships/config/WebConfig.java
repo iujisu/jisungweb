@@ -29,9 +29,4 @@ public class WebConfig implements WebMvcConfigurer {
 		return multipartResolver;
 	}
     
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
-
 }

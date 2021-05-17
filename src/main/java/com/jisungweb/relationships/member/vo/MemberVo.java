@@ -2,12 +2,18 @@ package com.jisungweb.relationships.member.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class MemberVo {
 	
 	@ApiModelProperty(value ="고유번호")
@@ -33,6 +39,10 @@ public class MemberVo {
 	
 	@ApiModelProperty(value ="유저key")
 	 private String userImagePath;
+	
+	@ApiModelProperty(value ="유저권한")
+	 private String userRoll;
+	
 	
 	 
 }
