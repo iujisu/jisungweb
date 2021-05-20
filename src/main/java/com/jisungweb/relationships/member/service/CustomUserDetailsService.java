@@ -37,6 +37,8 @@ public class CustomUserDetailsService implements UserDetailsService {
    }
    
    private org.springframework.security.core.userdetails.User createUser(String username, User user) {
+	   
+	   System.out.println("===========createUser============"); 
       if (!user.isActivated()) {
          throw new RuntimeException(username + " -> 활성화되어 있지 않습니다.");
       }

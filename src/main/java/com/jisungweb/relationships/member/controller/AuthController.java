@@ -32,14 +32,16 @@ public class AuthController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<TokenVo> authorize(@Valid @RequestBody LoginVo loginVo) {
-
-        UsernamePasswordAuthenticationToken authenticationToken =new UsernamePasswordAuthenticationToken(loginVo.getUsername(), loginVo.getUsername());
+ 	   System.out.println("===========loadUserByUsername============");
+        UsernamePasswordAuthenticationToken authenticationToken =new UsernamePasswordAuthenticationToken(loginVo.getUsername(), loginVo.getPassword());
 
  	   System.out.println("loadUserByUsername.username>>"+authenticationToken);
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = tokenProvider.createToken(authentication);
+        
+        System.out.println("authenticate.jwt>>"+jwt);
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);

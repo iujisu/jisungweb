@@ -85,7 +85,13 @@
 		</select>
 		
 		<select id="findOneWithAuthoritiesByUsername" resultType="User">
-			SELECT  USER_SEQ as userId,USER_NAME as username, PHONE_NUMBER as password,USER_KEY as nickname, USER_ACTIVATED as activated FROM TB_USER WHERE USER_NAME=#{userName}
+			SELECT  
+				USER_SEQ as userId,
+				USER_NAME as username, 
+				USER_PASSWORD as password,
+				USER_KEY as nickname, 
+				USER_ACTIVATED as activated 
+				FROM TB_USER WHERE USER_NAME=#{userName}
 		</select>
 		
 		
