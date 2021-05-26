@@ -83,5 +83,15 @@ public class MemberController {
 			
 			return ResponseEntity.ok(returnMap);
 		}
+		
+		@ApiOperation(value="사용자 상세정보",notes = "사용자 상세정보")
+		@GetMapping(value="/userInfo")
+		public ResponseEntity<?> userInfo(MemberVo memberVo) {
+			Map<String, String> map = new HashMap<String, String>();
+			System.out.println("====MemberController.userInfo====");
+			//Map<String, Object> returnMap = memService.loginUser(memberVo);
+			
+			return ResponseEntity.ok(map);
+		}
 			
 }

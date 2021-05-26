@@ -6,8 +6,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -19,6 +17,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedMethods("GET", "POST")
                 .maxAge(3000);
     }
+    
     
     @Bean
 	public CommonsMultipartResolver multipartResolver() {

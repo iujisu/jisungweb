@@ -42,12 +42,14 @@ public class TokenProvider implements InitializingBean {
 
    @Override
    public void afterPropertiesSet() {
+	   System.out.println("=====afterPropertiesSet========");
       byte[] keyBytes = Decoders.BASE64.decode(secret);
       this.key = Keys.hmacShaKeyFor(keyBytes);
    }
 
  // JWT 토큰 생성
    public String createToken(Authentication authentication) {
+	   System.out.println("=====createToken========");
       String authorities = authentication.getAuthorities().stream()
          .map(GrantedAuthority::getAuthority)
          .collect(Collectors.joining(","));
@@ -64,6 +66,7 @@ public class TokenProvider implements InitializingBean {
    }
 // JWT 토큰에서 인증 정보 조회
    public Authentication getAuthentication(String token) {
+	   System.out.println("=====getAuthentication========");
       Claims claims = Jwts
               .parserBuilder()
               .setSigningKey(key)
@@ -76,12 +79,15 @@ public class TokenProvider implements InitializingBean {
             .map(SimpleGrantedAuthority::new)
             .collect(Collectors.toList());
 
+      System.out.println("=====claims.getSubject()========"+claims.getSubject());
+      System.out.println("=====authorities======="+authorities);
       User principal = new User(claims.getSubject(), "", authorities);
 
       return new UsernamePasswordAuthenticationToken(principal, token, authorities);
    }
 
    public boolean validateToken(String token) {
+	   System.out.println("=====validateToken========");
       try {
          Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
          return true;

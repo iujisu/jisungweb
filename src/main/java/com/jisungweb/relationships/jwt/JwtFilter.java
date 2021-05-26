@@ -29,6 +29,7 @@ public class JwtFilter extends GenericFilterBean {
    @Override
    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
       throws IOException, ServletException {
+	   System.out.println("=====doFilter========");
       HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
       // 헤더에서 JWT 를 받아옵니다.
       String jwt = resolveToken(httpServletRequest);
@@ -46,7 +47,9 @@ public class JwtFilter extends GenericFilterBean {
    }
 
    private String resolveToken(HttpServletRequest request) {
+	  System.out.println("=====resolveToken========");
       String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
+      System.out.println("=====bearerToken=>>>"+bearerToken);
       if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
          return bearerToken.substring(7);
       }

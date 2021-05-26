@@ -44,8 +44,6 @@ public class CustomUserDetailsService implements UserDetailsService {
       }
       List<String> list = Arrays.asList("ROLE_USER","ROLE_ADMIN");//권한테스트
       List<GrantedAuthority> grantedAuthorities = list.stream().map(authority -> new SimpleGrantedAuthority("ROLE_USER")).collect(Collectors.toList());
-      return new org.springframework.security.core.userdetails.User(user.getUsername(),
-              user.getPassword(),
-              grantedAuthorities);
+      return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),grantedAuthorities);
    }
 }
