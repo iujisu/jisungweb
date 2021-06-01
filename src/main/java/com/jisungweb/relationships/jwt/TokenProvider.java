@@ -14,6 +14,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
+import com.jisungweb.relationships.member.vo.MemberVo;
+
 import java.security.Key;
 import java.util.Arrays;
 import java.util.Collection;
@@ -66,7 +68,7 @@ public class TokenProvider implements InitializingBean {
    }
 // JWT 토큰에서 인증 정보 조회
    public Authentication getAuthentication(String token) {
-	   System.out.println("=====getAuthentication========");
+	   System.out.println("=====4.getAuthentication========");
       Claims claims = Jwts
               .parserBuilder()
               .setSigningKey(key)
@@ -81,8 +83,8 @@ public class TokenProvider implements InitializingBean {
 
       System.out.println("=====claims.getSubject()========"+claims.getSubject());
       System.out.println("=====authorities======="+authorities);
-      User principal = new User(claims.getSubject(), "", authorities);
 
+      User principal = new User(claims.getSubject(), "", authorities);
       return new UsernamePasswordAuthenticationToken(principal, token, authorities);
    }
 

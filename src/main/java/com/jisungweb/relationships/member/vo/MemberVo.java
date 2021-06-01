@@ -43,6 +43,10 @@ public class MemberVo {
 	@ApiModelProperty(value ="유저권한")
 	 private String userRoll;
 	
+	@ApiModelProperty(value ="유저사용여부")
+	 private String userActivated;
+	
+	
 	
 	 
 }

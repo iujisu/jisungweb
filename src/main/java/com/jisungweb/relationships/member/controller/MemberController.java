@@ -35,7 +35,6 @@ public class MemberController {
 		@Value("${spring.servlet.multipart.location}") 
 		private String FILE_PATH;
 
-
 		@Autowired
 		private   MemberService memService;
 		
@@ -89,6 +88,7 @@ public class MemberController {
 		public ResponseEntity<?> userInfo(MemberVo memberVo) {
 			Map<String, String> map = new HashMap<String, String>();
 			System.out.println("====MemberController.userInfo====");
+			System.out.println("====memberVo.getUserName()>>>"+memberVo.getUserName());
 			//Map<String, Object> returnMap = memService.loginUser(memberVo);
 			
 			return ResponseEntity.ok(map);

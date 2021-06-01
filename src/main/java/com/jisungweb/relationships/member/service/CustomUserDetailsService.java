@@ -43,7 +43,7 @@ public class CustomUserDetailsService implements UserDetailsService {
          throw new RuntimeException(username + " -> 활성화되어 있지 않습니다.");
       }
       List<String> list = Arrays.asList("ROLE_USER","ROLE_ADMIN");//권한테스트
-      List<GrantedAuthority> grantedAuthorities = list.stream().map(authority -> new SimpleGrantedAuthority("ROLE_USER")).collect(Collectors.toList());
+      List<GrantedAuthority> grantedAuthorities = list.stream().map(authority -> new SimpleGrantedAuthority(user.getUserRoll())).collect(Collectors.toList());
       return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),grantedAuthorities);
    }
 }

@@ -28,13 +28,14 @@ public class MemberServiceImpl implements MemberService {
 		/*회원여부
 		 * userKey 가 있다면 회원등록한 유저
 		 * */
-
+		memberVo.setUserPassword(passwordEncoder.encode(memberVo.getUserPassword()));
 		MemberVo usertInfo= memMapper.getIsUser(memberVo);
 
 		 if(usertInfo == null ) {	
 			String userSeq=memMapper.getUserSeq();
 			memberVo.setUserSeq(userSeq);
-			memberVo.setUserPassword(passwordEncoder.encode(memberVo.getUserPassword()));
+			memberVo.setUserRoll("ROLE_USER");
+			memberVo.setUserActivated("1");
 			memMapper.insertUser(memberVo);
 			map.put("success",true);
 			map.put("message","회원가입성공");
@@ -73,6 +74,23 @@ public class MemberServiceImpl implements MemberService {
 		 //boolean check = passwordEncoder.matches(memberVo.getUserPassword(), usertLogin.getUserPassword());
 
 		return null;
+	}
+
+	@Override
+	public MemberVo getIsUser(MemberVo memberVo) {
+		System.out.println("====MemberServiceImpl.getIsUser====");
+		return memMapper.getIsUser(memberVo);
+	}
+
+	@Override
+	public Map<String, String> mapUser() {
+		System.out.println("====MemberServiceImpl.mapUser====");
+		Map<String, String> map = new HashMap<String, String>();
+		/*
+		 * MemberVo user= memMapper.mapUser(userKey); map.put("userSeq",
+		 * user.getUserSeq()); map.put("userName", user.getUserSeq());
+		 */
+		return map;
 	}
 
 

@@ -4,24 +4,22 @@ import lombok.*;
 
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
 
-   private Long userId;
+   private Long userSeq;
 
    private String username;
 
    private String password;
 
-   private String nickname;
+   private String userRoll;
 
    private boolean activated;
 
-public Object map(Object object) {
-	// TODO Auto-generated method stub
-	return null;
-}
+   public Object map(Object object) {
+		return null;
+   }
 
 }

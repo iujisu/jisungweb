@@ -18,6 +18,8 @@
 				,USER_KEY
 				,CREA_DATA
 				,USER_IMAGE_PATH
+				,USER_ROLL
+				,USER_ACTIVATED
 			 )VALUES (
 			   	${userSeq}
 				,#{userId}	
@@ -28,6 +30,8 @@
 				,(SELECT TO_CHAR(SYSDATE, 'YYYYMMDD') || LPAD(${userSeq}, 10, 0) FROM DUAL)
 				,SYSDATE
 				,#{userImagePath}
+				,#{userRoll}
+				,${userActivated}
 		   	)
 		</insert>
 		
@@ -48,6 +52,9 @@
 			</if>
 			<if test="phoneNumber != null and phoneNumber != '' ">
    				PHONE_NUMBER=#{phoneNumber},
+			</if>
+			<if test="userRoll != null and userRoll != '' ">
+   				USER_ROLL=#{userRoll},
 			</if>
 			WHERE  USER_KEY=#{userKey}
 		</update>
@@ -72,7 +79,14 @@
 		</select>
 		
 		<select id="getIsUser" resultType="MemberVo">
-			SELECT  * FROM TB_USER WHERE USER_ID=#{userId} 
+			SELECT  * FROM TB_USER WHERE 1=1
+			<if test="userId != null and userId != '' ">
+   				USER_ID=#{userId} 
+			</if>
+			<if test="userName != null and userName != '' ">
+   				AND USER_KEY=#{userKey}
+			</if>
+			
 			<if test="userName != null and userName != '' ">
    				AND USER_NAME=#{userName}
 			</if>
@@ -82,17 +96,28 @@
 			<if test="userEmail != null and userEmail != '' ">
    				AND USER_EMAIL=#{userEmail}
 			</if>
+	
 		</select>
 		
 		<select id="findOneWithAuthoritiesByUsername" resultType="User">
 			SELECT  
-				USER_SEQ as userId,
-				USER_NAME as username, 
+				USER_SEQ as userSeq,
 				USER_PASSWORD as password,
-				USER_KEY as nickname, 
+				USER_KEY as userName,
+				USER_ROLL as userRoll, 
 				USER_ACTIVATED as activated 
-				FROM TB_USER WHERE USER_NAME=#{userName}
+				FROM TB_USER WHERE USER_ID=#{userName}
 		</select>
+		
+		<select id="getUser" resultType="Camelmap">
+			SELECT  
+				USER_SEQ,
+				USER_NAME,
+				USER_ROLL, 
+				USER_ACTIVATED 
+			FROM TB_USER WHERE USER_KEY=#{userKey}
+		</select>
+		
 		
 		
 
