@@ -10,6 +10,8 @@ import org.springframework.web.filter.GenericFilterBean;
 
 import com.jisungweb.relationships.member.service.MemberService;
 
+import lombok.RequiredArgsConstructor;
+
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -18,22 +20,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.Map;
 
+@RequiredArgsConstructor
 public class JwtFilter extends GenericFilterBean {
 	
-	@Autowired
-	private   MemberService memService;
-
    private static final Logger logger = LoggerFactory.getLogger(JwtFilter.class);
 
    public static final String AUTHORIZATION_HEADER = "Authorization";
 
-   private TokenProvider tokenProvider;
+   private final TokenProvider tokenProvider;
    
-   public JwtFilter(TokenProvider tokenProvider) {
-      this.tokenProvider = tokenProvider;
-   }
 
    @Override
    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -52,14 +48,15 @@ public class JwtFilter extends GenericFilterBean {
          
          SecurityContextHolder.getContext().setAuthentication(authentication);
          String userKey=authentication.getName();
+         requestWrapper.setParameter("userKey", userKey);
          System.out.println("=====6.authentication.getName()========>>"+authentication.getName());
          
-         Map<String, String> userMap = memService.mapUser();
-
-         for(Map.Entry<String,String> entry : userMap.entrySet()){
-        	 System.out.println("key : " + entry.getKey() + " , value : " + entry.getValue());
-        	 requestWrapper.setParameter(entry.getKey(), entry.getValue());
-         }
+			/*
+			 * for(Map.Entry<String,String> entry : userMap.entrySet()){
+			 * System.out.println("key : " + entry.getKey() + " , value : " +
+			 * entry.getValue()); requestWrapper.setParameter(entry.getKey(),
+			 * entry.getValue()); }
+			 */
          
          logger.debug("Security Context에 '{}' 인증 정보를 저장했습니다, uri: {}", authentication.getName(), requestURI);
       } else {

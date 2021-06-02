@@ -76,8 +76,6 @@ public class MemberController {
 		public ResponseEntity<?> loginUser(@RequestBody MemberVo memberVo) {
 			Map<String, String> map = new HashMap<String, String>();
 			System.out.println("====MemberController.insertUser====");
-			System.out.println("getUserId==>>>"+memberVo.getPhoneNumber());
-
 			Map<String, Object> returnMap = memService.loginUser(memberVo);
 			
 			return ResponseEntity.ok(returnMap);
@@ -89,6 +87,7 @@ public class MemberController {
 			Map<String, String> map = new HashMap<String, String>();
 			System.out.println("====MemberController.userInfo====");
 			System.out.println("====memberVo.getUserName()>>>"+memberVo.getUserName());
+			System.out.println("====memberVo.getUserKey()>>>"+memberVo.getUserKey());
 			//Map<String, Object> returnMap = memService.loginUser(memberVo);
 			
 			return ResponseEntity.ok(map);
