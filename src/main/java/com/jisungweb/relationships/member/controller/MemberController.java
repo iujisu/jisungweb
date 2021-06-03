@@ -88,7 +88,7 @@ public class MemberController {
 			System.out.println("====MemberController.userInfo====");
 			System.out.println("====memberVo.getUserName()>>>"+memberVo.getUserName());
 			System.out.println("====memberVo.getUserKey()>>>"+memberVo.getUserKey());
-			//Map<String, Object> returnMap = memService.loginUser(memberVo);
+			Map<String, String> returnMap = memService.mapUser(memberVo);
 			
 			return ResponseEntity.ok(map);
 		}

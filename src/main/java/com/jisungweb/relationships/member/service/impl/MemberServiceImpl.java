@@ -83,15 +83,16 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Map<String, String> mapUser() {
+	public Map<String, String> mapUser(MemberVo memberVo) {
 		System.out.println("====MemberServiceImpl.mapUser====");
 		Map<String, String> map = new HashMap<String, String>();
-		/*
-		 * MemberVo user= memMapper.mapUser(userKey); map.put("userSeq",
-		 * user.getUserSeq()); map.put("userName", user.getUserSeq());
-		 */
-		return map;
+		
+		Map<String, String> user= memMapper.mapUser(memberVo); 
+
+		return user;
 	}
+	
+
 
 
 }

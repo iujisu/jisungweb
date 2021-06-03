@@ -109,7 +109,7 @@
 				FROM TB_USER WHERE USER_ID=#{userName}
 		</select>
 		
-		<select id="getUser" resultType="Camelmap">
+		<select id="mapUser" resultType="Camelmap">
 			SELECT  
 				USER_SEQ,
 				USER_NAME,

@@ -21,6 +21,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+
+/** 
+ * 
+ * @date : 2021. 6. 3. 
+ * @author : jisungYou 
+ * @version : 
+ * @Method info :  
+ */
 @RequiredArgsConstructor
 public class JwtFilter extends GenericFilterBean {
 	
@@ -31,9 +39,11 @@ public class JwtFilter extends GenericFilterBean {
    private final TokenProvider tokenProvider;
    
 
+   
+  
    @Override
    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-	   System.out.println("=====1.doFilter========");
+	   logger.info("JwtFilter.doFilter====>>>>>token 체크");
        ModifiableHttpServletRequestWrapper requestWrapper = new ModifiableHttpServletRequestWrapper((HttpServletRequest)servletRequest);
        HttpServletResponse response = (HttpServletResponse) servletResponse;
 
@@ -44,12 +54,10 @@ public class JwtFilter extends GenericFilterBean {
       // 유효한 토큰인지 확인합니다.
       if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
          Authentication authentication = tokenProvider.getAuthentication(jwt);
-       
-         
+
          SecurityContextHolder.getContext().setAuthentication(authentication);
          String userKey=authentication.getName();
          requestWrapper.setParameter("userKey", userKey);
-         System.out.println("=====6.authentication.getName()========>>"+authentication.getName());
          
 			/*
 			 * for(Map.Entry<String,String> entry : userMap.entrySet()){
@@ -58,18 +66,16 @@ public class JwtFilter extends GenericFilterBean {
 			 * entry.getValue()); }
 			 */
          
-         logger.debug("Security Context에 '{}' 인증 정보를 저장했습니다, uri: {}", authentication.getName(), requestURI);
+         logger.info("Security Context에 '{}' 인증 정보를 저장했습니다, uri: {}", authentication.getName(), requestURI);
       } else {
-         logger.debug("유효한 JWT 토큰이 없습니다, uri: {}", requestURI);
+         logger.info("유효한 JWT 토큰이 없습니다, uri: {}", requestURI);
       }
 
       filterChain.doFilter(requestWrapper, response);
    }
 
    private String resolveToken(HttpServletRequest request) {
-	  System.out.println("=====2.resolveToken========");
       String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
-      System.out.println("=====3.bearerToken=>>>"+bearerToken);
       if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
          return bearerToken.substring(7);
       }

@@ -26,6 +26,6 @@ public interface MemberMapper {
 
 	public User findOneWithAuthoritiesByUsername(String username);
 
-	public MemberVo mapUser(String userKey);
+	public Map<String, String> mapUser(MemberVo memberVo);
 
 }

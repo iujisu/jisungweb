@@ -12,6 +12,6 @@ public interface MemberService {
 	
 	MemberVo getIsUser(MemberVo memberVo);
 
-	Map<String, String> mapUser();
+	Map<String, String> mapUser(MemberVo memberVo);
 
 }
