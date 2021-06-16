@@ -14,4 +14,6 @@ public interface MemberService {
 
 	Map<String, String> mapUser(MemberVo memberVo);
 
+	Map<String, Object> getUserIdcheck(MemberVo memberVo);
+
 }

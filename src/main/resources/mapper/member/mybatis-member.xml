@@ -3,6 +3,12 @@
   
 <mapper namespace="com.jisungweb.relationships.member.mapper.MemberMapper">
 
+
+		<select id="getUserIdcheck" resultType="int">
+			SELECT  COUNT(USER_ID) FROM TB_USER 
+			WHERE USER_ID=#{userId} AND USER_PASSWORD IS NOT NULL
+		</select>
+		
 		<select id="getUserSeq" resultType="string">
 			SELECT USERSEQ.NEXTVAL FROM DUAL
 		</select>
@@ -118,6 +124,7 @@
 			FROM TB_USER WHERE USER_KEY=#{userKey}
 		</select>
 		
+
 		
 		
 

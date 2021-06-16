@@ -5,9 +5,16 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,8 +23,11 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.jisungweb.relationships.jwt.JwtFilter;
 import com.jisungweb.relationships.member.service.MemberService;
+import com.jisungweb.relationships.member.vo.LoginVo;
 import com.jisungweb.relationships.member.vo.MemberVo;
+import com.jisungweb.relationships.member.vo.TokenVo;
 
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +35,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
+/** 
+ * 
+ * @date : 2021. 6. 16. 
+ * @author : jisungYou 
+ * @version : 
+ * @Method info :  
+ */
 @RestController
 @RequestMapping("/api")
 @Slf4j
@@ -43,6 +60,27 @@ public class MemberController {
 			log.info("정보성 로그");
 			return "<h1>member/hello spring boot</h1>";
 		}
+		
+	    
+	 
+	   /**
+	  * @Method Name : userIdCheck
+	  * @작성일 : 2021. 6. 16.
+	  * @작성자 : jisungYou
+	  * @변경이력 : 
+	  * @Method 설명 :아이디 중복 체크
+	  * @param loginVo
+	  * @return
+	  */
+	@ApiOperation(value="사용자 아이디 중복 체크",notes = "아이디 중복 체크를 한다")
+	@GetMapping("/userIdCheck")
+	   public ResponseEntity<?> userIdCheck(MemberVo memberVo) {
+		   System.out.println("===========userIdCheck============"+memberVo.getUserId());
+	    
+		   Map<String, Object> map = memService.getUserIdcheck(memberVo);
+			
+			return ResponseEntity.ok(map);
+	   }
 
 		
 		@ApiOperation(value="사용자 정보 등록",notes = "사용자 정보 등록을 한다")

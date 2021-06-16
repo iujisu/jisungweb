@@ -85,11 +85,24 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Map<String, String> mapUser(MemberVo memberVo) {
 		System.out.println("====MemberServiceImpl.mapUser====");
-		Map<String, String> map = new HashMap<String, String>();
-		
 		Map<String, String> user= memMapper.mapUser(memberVo); 
 
 		return user;
+	}
+
+	@Override
+	public Map<String, Object> getUserIdcheck(MemberVo memberVo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		int useridCnt= memMapper.getUserIdcheck(memberVo); 
+		map.put("success",true);
+		if(useridCnt ==0) {
+			map.put("success",true);
+			map.put("message","사용가능 아이디 입니다.");
+		}else {
+			map.put("success",false);
+			map.put("message","사용 불가능 아이디 입니다.");
+		}
+		return map;
 	}
 	
 

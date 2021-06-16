@@ -19,6 +19,13 @@ import com.jisungweb.relationships.member.vo.TokenVo;
 
 import javax.validation.Valid;
 
+/** 
+ * 사용자 로그인
+ * @date : 2021. 6. 7. 
+ * @author : jisungYou 
+ * @version : 1.0
+ * @Method info :  
+ */
 @RestController
 @RequestMapping("/api")
 public class AuthController {
@@ -30,6 +37,15 @@ public class AuthController {
         this.authenticationManagerBuilder = authenticationManagerBuilder;
     }
 
+    /**
+      * @Method Name : authorize
+      * @작성일 : 2021. 6. 7.
+      * @작성자 : jisungYou
+      * @변경이력 : 1.0
+      * @Method 설명 : jwt 로그인 
+      * @param loginVo
+      * @return
+      */
     @PostMapping("/authenticate")
     public ResponseEntity<TokenVo> authorize(@Valid @RequestBody LoginVo loginVo) {
  	   System.out.println("===========loadUserByUsername============");
@@ -37,6 +53,9 @@ public class AuthController {
 
  	   System.out.println("loadUserByUsername.username>>"+authenticationToken);
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+        
+        System.out.println("authenticate>>"+authentication);
+        
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = tokenProvider.createToken(authentication);

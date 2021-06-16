@@ -28,4 +28,6 @@ public interface MemberMapper {
 
 	public Map<String, String> mapUser(MemberVo memberVo);
 
+	public int getUserIdcheck(MemberVo memberVo);
+
 }
