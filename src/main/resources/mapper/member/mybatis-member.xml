@@ -87,9 +87,9 @@
 		<select id="getIsUser" resultType="MemberVo">
 			SELECT  * FROM TB_USER WHERE 1=1
 			<if test="userId != null and userId != '' ">
-   				USER_ID=#{userId} 
+   				AND USER_ID=#{userId} 
 			</if>
-			<if test="userName != null and userName != '' ">
+			<if test="userKey != null and userKey != '' ">
    				AND USER_KEY=#{userKey}
 			</if>
 			
