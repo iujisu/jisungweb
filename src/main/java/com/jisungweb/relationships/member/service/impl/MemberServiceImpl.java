@@ -28,11 +28,13 @@ public class MemberServiceImpl implements MemberService {
 		/*회원여부
 		 * userKey 가 있다면 회원등록한 유저
 		 * */
-		System.out.println("====memberVo.getUserPassword()===="+memberVo.getUserPassword());
+
 		memberVo.setUserPassword(passwordEncoder.encode(memberVo.getUserPassword()));
 		MemberVo usertInfo= memMapper.getIsUser(memberVo);
 
 		 if(usertInfo == null ) {	
+			System.out.println("====memberVo.getUserImagePath()===="+memberVo.getUserImagePath());
+				
 			String userSeq=memMapper.getUserSeq();
 			memberVo.setUserSeq(userSeq);
 			memberVo.setUserRoll("ROLE_USER");

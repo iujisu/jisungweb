@@ -86,7 +86,7 @@ public class MemberController {
 		@ApiOperation(value="사용자 정보 등록",notes = "사용자 정보 등록을 한다")
 		@PostMapping(value="/memberJoin")
 		public ResponseEntity<?> memberJoin(@RequestPart(value="file", required=false) MultipartFile file,MemberVo memberVo) throws Exception {
-			System.out.println("====MemberController.memberJoin====");
+			System.out.println("====MemberController.memberJoin===="+file);
 			
 			if(file != null) {
 				//logger.info("file = " + file.getSize());
